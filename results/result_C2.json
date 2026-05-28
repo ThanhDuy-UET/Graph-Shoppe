@@ -1,0 +1,29 @@
+{
+  "config_name": "C2",
+  "orders_total_fixed": 25,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "VRP-OrTools",
+      "config_name": "C2",
+      "total_orders": 25,
+      "orders_generated": 25,
+      "delivered": 20,
+      "on_time": 20,
+      "late": 0,
+      "missed": 5,
+      "delivery_rate": 80.0,
+      "on_time_rate": 100.0,
+      "total_reward": 359.8519,
+      "total_movecost": -1.6248,
+      "net_reward": 358.2271,
+      "elapsed_sec": 0.6573,
+      "shipper_rewards": [
+        148.6682,
+        209.5589
+      ],
+      "status": "OK",
+      "wall_sec": 0.66
+    }
+  ]
+}
