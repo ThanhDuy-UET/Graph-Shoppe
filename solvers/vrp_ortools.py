@@ -1,14 +1,19 @@
 from __future__ import annotations
 
 import time
-from typing import Dict, List, NamedTuple, Optional, Tuple
+from collections import deque
+from typing import Dict, Iterable, List, NamedTuple, Optional, Tuple
 
-from env import DeliveryEnv, Order, Shipper
-from solvers.greedy_bfs import GreedyBFS, INF
+from env import DeliveryEnv, Order, Shipper, valid_next_pos
+from solvers.solver import Solver
 
 
+Move = str
 Position = Tuple[int, int]
-Action = Tuple[str, object]
+Action = Tuple[Move, object]
+
+INF = 10**9
+MOVES: Tuple[Move, ...] = ("U", "D", "L", "R")
 
 
 class Stop(NamedTuple):
@@ -27,27 +32,98 @@ class Job(NamedTuple):
     deadline: int
 
 
-class VRPOrToolsSolver(GreedyBFS):
-    """
-    Self-coded online VRP heuristic inspired by OR-Tools Routing Solver.
+class VRPOrToolsSolver(Solver):
 
-    It does not import OR-Tools. The solver implements the same core ideas:
-    vehicles, routes, pickup-delivery nodes, distance cost, capacity checks,
-    disjunction-like penalties, cheapest insertion, and light local search.
-    """
-
-    method_name = "VRP-OrTools"
+    method_name = "VRPOrTools"
 
     def __init__(self, env: DeliveryEnv):
         super().__init__(env)
+        self._distance_cache: Dict[Tuple[Position, Position], int] = {}
+        self._next_move_cache: Dict[Tuple[Position, Position], Move] = {}
         self.max_candidate_jobs = 18
         self.local_search_rounds = 2
+
         self.distance_weight = 0.85
         self.late_weight = 7.0
         self.reward_weight = 0.75
 
     # ------------------------------------------------------------------
-    # Cost helpers
+    # Shortest path helpers
+    # ------------------------------------------------------------------
+    def _neighbors(self, pos: Position) -> Iterable[Tuple[Move, Position]]:
+        for move in MOVES:
+            nxt = valid_next_pos(pos, move, self.grid)
+            if nxt != pos:
+                yield move, nxt
+
+    def _distance(self, start: Position, goal: Position) -> int:
+        if start == goal:
+            return 0
+
+        key = (start, goal)
+        if key in self._distance_cache:
+            return self._distance_cache[key]
+
+        queue: deque[Position] = deque([start])
+        dist = {start: 0}
+
+        while queue:
+            cur = queue.popleft()
+            if cur == goal:
+                self._distance_cache[key] = dist[cur]
+                return dist[cur]
+
+            for _, nxt in self._neighbors(cur):
+                if nxt not in dist:
+                    dist[nxt] = dist[cur] + 1
+                    queue.append(nxt)
+
+        self._distance_cache[key] = INF
+        return INF
+
+    def _next_move(self, start: Position, goal: Position) -> Move:
+        if start == goal:
+            return "S"
+
+        key = (start, goal)
+        if key in self._next_move_cache:
+            return self._next_move_cache[key]
+
+        queue: deque[Position] = deque([start])
+        parent: Dict[Position, Tuple[Optional[Position], Move]] = {start: (None, "S")}
+
+        while queue:
+            cur = queue.popleft()
+            if cur == goal:
+                break
+
+            for move, nxt in self._neighbors(cur):
+                if nxt not in parent:
+                    parent[nxt] = (cur, move)
+                    queue.append(nxt)
+
+        if goal not in parent:
+            self._next_move_cache[key] = "S"
+            return "S"
+
+        cur = goal
+        while parent[cur][0] != start:
+            prev, _ = parent[cur]
+            if prev is None:
+                self._next_move_cache[key] = "S"
+                return "S"
+            cur = prev
+
+        first_move = parent[cur][1]
+        self._next_move_cache[key] = first_move
+        return first_move
+
+    def _move_towards(self, shipper: Shipper, goal: Position) -> Tuple[Move, Position]:
+        move = self._next_move(shipper.position, goal)
+        return move, valid_next_pos(shipper.position, move, self.grid)
+
+    # ------------------------------------------------------------------
+    # Route objective
     # ------------------------------------------------------------------
     def _base_reward(self, w: float) -> float:
         if w <= 0.2:
@@ -60,7 +136,7 @@ class VRPOrToolsSolver(GreedyBFS):
             return 20.0
         return 30.0
 
-    def _estimate_reward(self, order: Order, t_delivery: int, horizon: int) -> float:
+    def _estimate_reward(self, order: Order, t_delivery: int, T: int) -> float:
         alpha = {1: 1.0, 2: 2.0, 3: 3.0}
         beta = {1: 0.1, 2: 0.3, 3: 0.5}
         rb = self._base_reward(order.w)
@@ -69,7 +145,7 @@ class VRPOrToolsSolver(GreedyBFS):
             bonus = max(0.0, (order.et - t_delivery) / max(order.et, 1))
             return alpha[order.p] * rb * (1.0 + bonus)
 
-        factor = max(0.0, 1.0 - (t_delivery - order.et) / max(horizon, 1))
+        factor = max(0.0, 1.0 - (t_delivery - order.et) / max(T, 1))
         return beta[order.p] * rb * factor
 
     def _initial_load(self, shipper: Shipper, orders: Dict[int, Order]) -> Tuple[float, int, set[int]]:
@@ -83,7 +159,7 @@ class VRPOrToolsSolver(GreedyBFS):
         route: List[Stop],
         orders: Dict[int, Order],
         start_t: int,
-        horizon: int,
+        T: int,
     ) -> float:
         weight, count, onboard = self._initial_load(shipper, orders)
         cur = shipper.position
@@ -110,14 +186,14 @@ class VRPOrToolsSolver(GreedyBFS):
                 count += 1
                 onboard.add(stop.oid)
 
-                if count > shipper.K_max or weight > shipper.W_max:
+                if weight > shipper.W_max or count > shipper.K_max:
                     return float("inf")
 
             elif stop.kind == "delivery":
                 if stop.oid not in onboard:
                     return float("inf")
 
-                reward = self._estimate_reward(order, t, horizon)
+                reward = self._estimate_reward(order, t, T)
                 lateness = max(0, t - order.et)
                 cost += self.late_weight * lateness
                 cost -= self.reward_weight * reward
@@ -134,7 +210,7 @@ class VRPOrToolsSolver(GreedyBFS):
         return cost
 
     # ------------------------------------------------------------------
-    # VRP model construction
+    # VRP model
     # ------------------------------------------------------------------
     def _make_jobs(self, obs: dict) -> List[Job]:
         orders: Dict[int, Order] = obs["orders"]
@@ -159,20 +235,13 @@ class VRPOrToolsSolver(GreedyBFS):
                     )
                 )
 
-        unpicked = [
-            order
-            for order in orders.values()
-            if not order.picked and not order.delivered
-        ]
+        unpicked = [order for order in orders.values() if not order.picked and not order.delivered]
 
-        def candidate_key(order: Order) -> tuple:
-            nearest_pickup = min(
-                self._distance(shipper.position, (order.sx, order.sy))
-                for shipper in shippers
-            )
-            return (-order.p, order.et, nearest_pickup, order.id)
+        def job_key(order: Order) -> tuple:
+            nearest = min(self._distance(shipper.position, (order.sx, order.sy)) for shipper in shippers)
+            return (-order.p, order.et, nearest, order.id)
 
-        unpicked.sort(key=candidate_key)
+        unpicked.sort(key=job_key)
         unpicked = unpicked[: self.max_candidate_jobs]
 
         for order in unpicked:
@@ -211,17 +280,17 @@ class VRPOrToolsSolver(GreedyBFS):
         job: Job,
         shipper: Shipper,
         orders: Dict[int, Order],
-        start_t: int,
-        horizon: int,
+        t: int,
+        T: int,
     ) -> Tuple[float, Optional[List[Stop]]]:
-        old_cost = self._route_cost(shipper, route, orders, start_t, horizon)
+        old_cost = self._route_cost(shipper, route, orders, t, T)
         best_delta = float("inf")
         best_route: Optional[List[Stop]] = None
 
         if len(job.stops) == 1:
             for i in range(len(route) + 1):
                 candidate = route[:i] + list(job.stops) + route[i:]
-                new_cost = self._route_cost(shipper, candidate, orders, start_t, horizon)
+                new_cost = self._route_cost(shipper, candidate, orders, t, T)
                 delta = new_cost - old_cost
                 if delta < best_delta:
                     best_delta = delta
@@ -233,7 +302,7 @@ class VRPOrToolsSolver(GreedyBFS):
             with_pickup = route[:pickup_i] + [pickup] + route[pickup_i:]
             for delivery_i in range(pickup_i + 1, len(with_pickup) + 1):
                 candidate = with_pickup[:delivery_i] + [delivery] + with_pickup[delivery_i:]
-                new_cost = self._route_cost(shipper, candidate, orders, start_t, horizon)
+                new_cost = self._route_cost(shipper, candidate, orders, t, T)
                 delta = new_cost - old_cost
                 if delta < best_delta:
                     best_delta = delta
@@ -297,6 +366,9 @@ class VRPOrToolsSolver(GreedyBFS):
 
         return self._local_search(routes, obs)
 
+    # ------------------------------------------------------------------
+    # Local search
+    # ------------------------------------------------------------------
     def _total_pair_cost(
         self,
         sid_a: int,
@@ -311,6 +383,46 @@ class VRPOrToolsSolver(GreedyBFS):
             self._route_cost(shipper_by_id[sid_a], route_a, orders, obs["t"], obs["T"])
             + self._route_cost(shipper_by_id[sid_b], route_b, orders, obs["t"], obs["T"])
         )
+
+    def _try_swap_between_routes(
+        self,
+        routes: Dict[int, List[Stop]],
+        shipper_by_id: Dict[int, Shipper],
+        orders: Dict[int, Order],
+        obs: dict,
+    ) -> bool:
+        ids = sorted(routes)
+
+        for index_a, sid_a in enumerate(ids):
+            for sid_b in ids[index_a + 1:]:
+                route_a = routes[sid_a]
+                route_b = routes[sid_b]
+                if not route_a or not route_b:
+                    continue
+
+                old_cost = self._total_pair_cost(sid_a, route_a, sid_b, route_b, shipper_by_id, orders, obs)
+
+                for i in range(len(route_a)):
+                    for j in range(len(route_b)):
+                        candidate_a = route_a[:]
+                        candidate_b = route_b[:]
+                        candidate_a[i], candidate_b[j] = candidate_b[j], candidate_a[i]
+                        new_cost = self._total_pair_cost(
+                            sid_a,
+                            candidate_a,
+                            sid_b,
+                            candidate_b,
+                            shipper_by_id,
+                            orders,
+                            obs,
+                        )
+
+                        if new_cost + 1e-9 < old_cost:
+                            routes[sid_a] = candidate_a
+                            routes[sid_b] = candidate_b
+                            return True
+
+        return False
 
     def _try_relocate_between_routes(
         self,
@@ -382,53 +494,9 @@ class VRPOrToolsSolver(GreedyBFS):
         shipper_by_id = {shipper.id: shipper for shipper in shippers}
 
         for _ in range(self.local_search_rounds):
-            improved = False
-            ids = sorted(routes)
-
-            for sid_a_index, sid_a in enumerate(ids):
-                for sid_b in ids[sid_a_index + 1:]:
-                    route_a = routes[sid_a]
-                    route_b = routes[sid_b]
-                    if not route_a or not route_b:
-                        continue
-
-                    old_cost = (
-                        self._route_cost(shipper_by_id[sid_a], route_a, orders, obs["t"], obs["T"])
-                        + self._route_cost(shipper_by_id[sid_b], route_b, orders, obs["t"], obs["T"])
-                    )
-
-                    for i in range(len(route_a)):
-                        for j in range(len(route_b)):
-                            candidate_a = route_a[:]
-                            candidate_b = route_b[:]
-                            candidate_a[i], candidate_b[j] = candidate_b[j], candidate_a[i]
-
-                            new_cost = (
-                                self._route_cost(shipper_by_id[sid_a], candidate_a, orders, obs["t"], obs["T"])
-                                + self._route_cost(shipper_by_id[sid_b], candidate_b, orders, obs["t"], obs["T"])
-                            )
-
-                            if new_cost + 1e-9 < old_cost:
-                                routes[sid_a] = candidate_a
-                                routes[sid_b] = candidate_b
-                                improved = True
-                                break
-
-                        if improved:
-                            break
-
-                    if improved:
-                        break
-
-                if improved:
-                    break
-
-            if not improved:
-                break
-
-        for _ in range(self.local_search_rounds):
             improved = (
-                self._try_relocate_between_routes(routes, shipper_by_id, orders, obs)
+                self._try_swap_between_routes(routes, shipper_by_id, orders, obs)
+                or self._try_relocate_between_routes(routes, shipper_by_id, orders, obs)
                 or self._try_two_opt_inside_route(routes, shipper_by_id, orders, obs)
             )
             if not improved:
@@ -446,10 +514,7 @@ class VRPOrToolsSolver(GreedyBFS):
         actions: Dict[int, Action] = {}
 
         for shipper in sorted(shippers, key=lambda s: s.id):
-            if any(
-                oid in orders and shipper.can_deliver(orders[oid])
-                for oid in shipper.bag
-            ):
+            if any(oid in orders and shipper.can_deliver(orders[oid]) for oid in shipper.bag):
                 actions[shipper.id] = ("S", 2)
                 continue
 

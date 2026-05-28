@@ -4,7 +4,7 @@
   "online_generation": true,
   "results": [
     {
-      "method": "VRP-OrTools",
+      "method": "VRPOrTools",
       "config_name": "C4",
       "total_orders": 60,
       "orders_generated": 60,
@@ -17,7 +17,7 @@
       "total_reward": 502.9453,
       "total_movecost": -7.325,
       "net_reward": 495.6203,
-      "elapsed_sec": 17.9757,
+      "elapsed_sec": 9.9069,
       "shipper_rewards": [
         -0.0375,
         23.28,
@@ -25,7 +25,7 @@
         388.0966
       ],
       "status": "OK",
-      "wall_sec": 17.98
+      "wall_sec": 9.91
     }
   ]
 }
