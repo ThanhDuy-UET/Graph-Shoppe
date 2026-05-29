@@ -1,0 +1,32 @@
+{
+  "config_name": "S08_Bridge12Burst",
+  "orders_total_fixed": 115,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S08_Bridge12Burst",
+      "total_orders": 115,
+      "orders_generated": 115,
+      "delivered": 25,
+      "on_time": 23,
+      "late": 2,
+      "missed": 90,
+      "delivery_rate": 21.73913043478261,
+      "on_time_rate": 92.0,
+      "total_reward": 699.5117,
+      "total_movecost": -4.5975,
+      "net_reward": 694.9142,
+      "elapsed_sec": 0.5431,
+      "shipper_rewards": [
+        139.8675,
+        91.4024,
+        183.3882,
+        245.3563,
+        34.8997
+      ],
+      "status": "OK",
+      "wall_sec": 0.55
+    }
+  ]
+}

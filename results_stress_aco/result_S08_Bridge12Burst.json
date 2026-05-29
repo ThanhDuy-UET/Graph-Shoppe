@@ -1,0 +1,32 @@
+{
+  "config_name": "S08_Bridge12Burst",
+  "orders_total_fixed": 115,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S08_Bridge12Burst",
+      "total_orders": 115,
+      "orders_generated": 115,
+      "delivered": 22,
+      "on_time": 19,
+      "late": 3,
+      "missed": 93,
+      "delivery_rate": 19.130434782608695,
+      "on_time_rate": 86.36363636363636,
+      "total_reward": 535.298,
+      "total_movecost": -4.4525,
+      "net_reward": 530.8454,
+      "elapsed_sec": 1.0514,
+      "shipper_rewards": [
+        87.7678,
+        91.0777,
+        147.1318,
+        159.3367,
+        45.5314
+      ],
+      "status": "OK",
+      "wall_sec": 1.05
+    }
+  ]
+}

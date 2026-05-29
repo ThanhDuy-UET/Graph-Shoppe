@@ -1,0 +1,30 @@
+{
+  "config_name": "C3",
+  "orders_total_fixed": 40,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "C3",
+      "total_orders": 40,
+      "orders_generated": 40,
+      "delivered": 37,
+      "on_time": 30,
+      "late": 7,
+      "missed": 3,
+      "delivery_rate": 92.5,
+      "on_time_rate": 81.08108108108108,
+      "total_reward": 855.9804,
+      "total_movecost": -5.2787,
+      "net_reward": 850.7017,
+      "elapsed_sec": 3.3674,
+      "shipper_rewards": [
+        236.0325,
+        226.5335,
+        388.1357
+      ],
+      "status": "OK",
+      "wall_sec": 3.37
+    }
+  ]
+}

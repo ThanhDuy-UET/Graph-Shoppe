@@ -1,0 +1,30 @@
+{
+  "config_name": "S05_Bridge12Rush",
+  "orders_total_fixed": 70,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S05_Bridge12Rush",
+      "total_orders": 70,
+      "orders_generated": 70,
+      "delivered": 0,
+      "on_time": 0,
+      "late": 0,
+      "missed": 70,
+      "delivery_rate": 0.0,
+      "on_time_rate": 0.0,
+      "total_reward": 0.0,
+      "total_movecost": -0.3746,
+      "net_reward": -0.3746,
+      "elapsed_sec": 0.2184,
+      "shipper_rewards": [
+        -0.183,
+        -0.1003,
+        -0.0913
+      ],
+      "status": "OK",
+      "wall_sec": 0.22
+    }
+  ]
+}

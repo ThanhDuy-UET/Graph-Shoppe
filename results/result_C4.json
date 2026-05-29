@@ -4,6 +4,78 @@
   "online_generation": true,
   "results": [
     {
+      "method": "GreedyBFS",
+      "config_name": "C4",
+      "total_orders": 60,
+      "orders_generated": 60,
+      "delivered": 47,
+      "on_time": 41,
+      "late": 6,
+      "missed": 13,
+      "delivery_rate": 78.33333333333333,
+      "on_time_rate": 87.23404255319149,
+      "total_reward": 911.6873,
+      "total_movecost": -13.5808,
+      "net_reward": 898.1065,
+      "elapsed_sec": 0.5602,
+      "shipper_rewards": [
+        107.0611,
+        389.2734,
+        210.8416,
+        190.9304
+      ],
+      "status": "OK",
+      "wall_sec": 0.56
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "C4",
+      "total_orders": 60,
+      "orders_generated": 60,
+      "delivered": 44,
+      "on_time": 23,
+      "late": 21,
+      "missed": 16,
+      "delivery_rate": 73.33333333333333,
+      "on_time_rate": 52.27272727272727,
+      "total_reward": 502.9453,
+      "total_movecost": -7.325,
+      "net_reward": 495.6203,
+      "elapsed_sec": 27.5402,
+      "shipper_rewards": [
+        -0.0375,
+        23.28,
+        84.2812,
+        388.0966
+      ],
+      "status": "OK",
+      "wall_sec": 27.54
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "C4",
+      "total_orders": 60,
+      "orders_generated": 60,
+      "delivered": 44,
+      "on_time": 43,
+      "late": 1,
+      "missed": 16,
+      "delivery_rate": 73.33333333333333,
+      "on_time_rate": 97.72727272727273,
+      "total_reward": 893.327,
+      "total_movecost": -14.5362,
+      "net_reward": 878.7908,
+      "elapsed_sec": 0.9902,
+      "shipper_rewards": [
+        387.7995,
+        236.8538,
+        81.9706,
+        172.1668
+      ],
+      "status": "OK",
+      "wall_sec": 0.99
+    },
+    {
       "method": "MAPD-CBS",
       "config_name": "C4",
       "total_orders": 60,
@@ -17,7 +89,7 @@
       "total_reward": 1098.4962,
       "total_movecost": -21.6784,
       "net_reward": 1076.8178,
-      "elapsed_sec": 1.8084,
+      "elapsed_sec": 4.3331,
       "shipper_rewards": [
         267.3745,
         376.0068,
@@ -25,7 +97,7 @@
         149.0122
       ],
       "status": "OK",
-      "wall_sec": 1.81
+      "wall_sec": 4.33
     }
   ]
 }

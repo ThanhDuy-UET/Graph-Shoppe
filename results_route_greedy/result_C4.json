@@ -1,0 +1,31 @@
+{
+  "config_name": "C4",
+  "orders_total_fixed": 60,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "C4",
+      "total_orders": 60,
+      "orders_generated": 60,
+      "delivered": 50,
+      "on_time": 41,
+      "late": 9,
+      "missed": 10,
+      "delivery_rate": 83.33333333333333,
+      "on_time_rate": 82.0,
+      "total_reward": 898.8498,
+      "total_movecost": -11.8313,
+      "net_reward": 887.0185,
+      "elapsed_sec": 10.5166,
+      "shipper_rewards": [
+        189.1944,
+        329.3689,
+        295.9359,
+        72.5194
+      ],
+      "status": "OK",
+      "wall_sec": 10.52
+    }
+  ]
+}
