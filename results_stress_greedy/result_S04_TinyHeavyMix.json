@@ -1,0 +1,31 @@
+{
+  "config_name": "S04_TinyHeavyMix",
+  "orders_total_fixed": 85,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S04_TinyHeavyMix",
+      "total_orders": 85,
+      "orders_generated": 85,
+      "delivered": 19,
+      "on_time": 18,
+      "late": 1,
+      "missed": 66,
+      "delivery_rate": 22.352941176470587,
+      "on_time_rate": 94.73684210526316,
+      "total_reward": 548.1552,
+      "total_movecost": -2.2549,
+      "net_reward": 545.9003,
+      "elapsed_sec": 0.3705,
+      "shipper_rewards": [
+        213.188,
+        -0.0313,
+        147.0489,
+        185.6947
+      ],
+      "status": "OK",
+      "wall_sec": 0.37
+    }
+  ]
+}

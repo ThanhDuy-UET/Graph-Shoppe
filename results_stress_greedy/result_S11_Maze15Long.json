@@ -1,0 +1,32 @@
+{
+  "config_name": "S11_Maze15Long",
+  "orders_total_fixed": 135,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S11_Maze15Long",
+      "total_orders": 135,
+      "orders_generated": 135,
+      "delivered": 7,
+      "on_time": 5,
+      "late": 2,
+      "missed": 128,
+      "delivery_rate": 5.185185185185185,
+      "on_time_rate": 71.42857142857143,
+      "total_reward": 157.0227,
+      "total_movecost": -3.2172,
+      "net_reward": 153.8055,
+      "elapsed_sec": 3.1276,
+      "shipper_rewards": [
+        -0.07,
+        34.6771,
+        53.924,
+        41.5272,
+        23.7472
+      ],
+      "status": "OK",
+      "wall_sec": 3.13
+    }
+  ]
+}

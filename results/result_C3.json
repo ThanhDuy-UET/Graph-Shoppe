@@ -4,6 +4,75 @@
   "online_generation": true,
   "results": [
     {
+      "method": "GreedyBFS",
+      "config_name": "C3",
+      "total_orders": 40,
+      "orders_generated": 40,
+      "delivered": 34,
+      "on_time": 33,
+      "late": 1,
+      "missed": 6,
+      "delivery_rate": 85.0,
+      "on_time_rate": 97.05882352941177,
+      "total_reward": 849.0274,
+      "total_movecost": -5.9012,
+      "net_reward": 843.1262,
+      "elapsed_sec": 0.1488,
+      "shipper_rewards": [
+        279.3613,
+        266.6282,
+        297.1367
+      ],
+      "status": "OK",
+      "wall_sec": 0.15
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "C3",
+      "total_orders": 40,
+      "orders_generated": 40,
+      "delivered": 28,
+      "on_time": 27,
+      "late": 1,
+      "missed": 12,
+      "delivery_rate": 70.0,
+      "on_time_rate": 96.42857142857143,
+      "total_reward": 721.2192,
+      "total_movecost": -3.6363,
+      "net_reward": 717.5829,
+      "elapsed_sec": 1.2139,
+      "shipper_rewards": [
+        396.6614,
+        37.7621,
+        283.1593
+      ],
+      "status": "OK",
+      "wall_sec": 1.21
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "C3",
+      "total_orders": 40,
+      "orders_generated": 40,
+      "delivered": 27,
+      "on_time": 25,
+      "late": 2,
+      "missed": 13,
+      "delivery_rate": 67.5,
+      "on_time_rate": 92.5925925925926,
+      "total_reward": 645.5065,
+      "total_movecost": -5.0963,
+      "net_reward": 640.4102,
+      "elapsed_sec": 0.3197,
+      "shipper_rewards": [
+        203.962,
+        181.1906,
+        255.2577
+      ],
+      "status": "OK",
+      "wall_sec": 0.32
+    },
+    {
       "method": "MAPD-CBS",
       "config_name": "C3",
       "total_orders": 40,
@@ -17,14 +86,14 @@
       "total_reward": 903.0204,
       "total_movecost": -6.8577,
       "net_reward": 896.1627,
-      "elapsed_sec": 0.3117,
+      "elapsed_sec": 0.7657,
       "shipper_rewards": [
         509.7158,
         268.6939,
         117.7529
       ],
       "status": "OK",
-      "wall_sec": 0.31
+      "wall_sec": 0.77
     }
   ]
 }

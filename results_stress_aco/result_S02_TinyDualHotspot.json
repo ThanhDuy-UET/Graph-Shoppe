@@ -1,0 +1,30 @@
+{
+  "config_name": "S02_TinyDualHotspot",
+  "orders_total_fixed": 65,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S02_TinyDualHotspot",
+      "total_orders": 65,
+      "orders_generated": 65,
+      "delivered": 4,
+      "on_time": 4,
+      "late": 0,
+      "missed": 61,
+      "delivery_rate": 6.153846153846154,
+      "on_time_rate": 100.0,
+      "total_reward": 115.0587,
+      "total_movecost": -1.1692,
+      "net_reward": 113.8895,
+      "elapsed_sec": 0.1674,
+      "shipper_rewards": [
+        45.8499,
+        50.3083,
+        17.7313
+      ],
+      "status": "OK",
+      "wall_sec": 0.17
+    }
+  ]
+}

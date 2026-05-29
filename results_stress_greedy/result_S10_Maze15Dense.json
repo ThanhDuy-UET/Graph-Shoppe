@@ -1,0 +1,32 @@
+{
+  "config_name": "S10_Maze15Dense",
+  "orders_total_fixed": 120,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S10_Maze15Dense",
+      "total_orders": 120,
+      "orders_generated": 120,
+      "delivered": 5,
+      "on_time": 5,
+      "late": 0,
+      "missed": 115,
+      "delivery_rate": 4.166666666666667,
+      "on_time_rate": 100.0,
+      "total_reward": 176.4654,
+      "total_movecost": -2.0682,
+      "net_reward": 174.3972,
+      "elapsed_sec": 0.9433,
+      "shipper_rewards": [
+        14.8345,
+        122.6141,
+        -0.2125,
+        -0.3067,
+        37.4679
+      ],
+      "status": "OK",
+      "wall_sec": 0.95
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "config_name": "S14_Dual18Dense",
+  "orders_total_fixed": 165,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S14_Dual18Dense",
+      "total_orders": 165,
+      "orders_generated": 165,
+      "delivered": 36,
+      "on_time": 33,
+      "late": 3,
+      "missed": 129,
+      "delivery_rate": 21.818181818181817,
+      "on_time_rate": 91.66666666666667,
+      "total_reward": 847.6419,
+      "total_movecost": -10.4626,
+      "net_reward": 837.1793,
+      "elapsed_sec": 1.3833,
+      "shipper_rewards": [
+        15.9357,
+        10.4339,
+        324.3029,
+        50.9761,
+        104.5219,
+        331.0088
+      ],
+      "status": "OK",
+      "wall_sec": 1.39
+    }
+  ]
+}

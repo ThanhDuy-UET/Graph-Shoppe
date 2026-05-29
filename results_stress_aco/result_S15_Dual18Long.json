@@ -1,0 +1,33 @@
+{
+  "config_name": "S15_Dual18Long",
+  "orders_total_fixed": 180,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S15_Dual18Long",
+      "total_orders": 180,
+      "orders_generated": 180,
+      "delivered": 59,
+      "on_time": 55,
+      "late": 4,
+      "missed": 121,
+      "delivery_rate": 32.77777777777778,
+      "on_time_rate": 93.22033898305085,
+      "total_reward": 1279.5769,
+      "total_movecost": -19.8579,
+      "net_reward": 1259.719,
+      "elapsed_sec": 3.5566,
+      "shipper_rewards": [
+        200.9686,
+        264.128,
+        121.4806,
+        167.8841,
+        242.2419,
+        263.0158
+      ],
+      "status": "OK",
+      "wall_sec": 3.56
+    }
+  ]
+}

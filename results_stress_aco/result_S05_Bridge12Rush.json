@@ -1,0 +1,30 @@
+{
+  "config_name": "S05_Bridge12Rush",
+  "orders_total_fixed": 70,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S05_Bridge12Rush",
+      "total_orders": 70,
+      "orders_generated": 70,
+      "delivered": 32,
+      "on_time": 22,
+      "late": 10,
+      "missed": 38,
+      "delivery_rate": 45.714285714285715,
+      "on_time_rate": 68.75,
+      "total_reward": 518.0205,
+      "total_movecost": -4.961,
+      "net_reward": 513.0595,
+      "elapsed_sec": 0.6494,
+      "shipper_rewards": [
+        97.7999,
+        248.4384,
+        166.8212
+      ],
+      "status": "OK",
+      "wall_sec": 0.65
+    }
+  ]
+}

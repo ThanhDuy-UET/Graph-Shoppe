@@ -1,0 +1,30 @@
+{
+  "config_name": "S01_TinyRushTight",
+  "orders_total_fixed": 55,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S01_TinyRushTight",
+      "total_orders": 55,
+      "orders_generated": 55,
+      "delivered": 23,
+      "on_time": 22,
+      "late": 1,
+      "missed": 32,
+      "delivery_rate": 41.81818181818182,
+      "on_time_rate": 95.65217391304348,
+      "total_reward": 669.0858,
+      "total_movecost": -3.3775,
+      "net_reward": 665.7083,
+      "elapsed_sec": 0.1917,
+      "shipper_rewards": [
+        155.7791,
+        34.2527,
+        475.6765
+      ],
+      "status": "OK",
+      "wall_sec": 0.19
+    }
+  ]
+}

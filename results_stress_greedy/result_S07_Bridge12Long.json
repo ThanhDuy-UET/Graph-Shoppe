@@ -1,0 +1,31 @@
+{
+  "config_name": "S07_Bridge12Long",
+  "orders_total_fixed": 100,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S07_Bridge12Long",
+      "total_orders": 100,
+      "orders_generated": 100,
+      "delivered": 34,
+      "on_time": 29,
+      "late": 5,
+      "missed": 66,
+      "delivery_rate": 34.0,
+      "on_time_rate": 85.29411764705883,
+      "total_reward": 765.4524,
+      "total_movecost": -5.9172,
+      "net_reward": 759.5352,
+      "elapsed_sec": 0.5933,
+      "shipper_rewards": [
+        200.3385,
+        154.589,
+        113.8641,
+        290.7436
+      ],
+      "status": "OK",
+      "wall_sec": 0.6
+    }
+  ]
+}

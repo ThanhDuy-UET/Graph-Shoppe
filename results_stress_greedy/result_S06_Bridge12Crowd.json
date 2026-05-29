@@ -1,0 +1,31 @@
+{
+  "config_name": "S06_Bridge12Crowd",
+  "orders_total_fixed": 90,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S06_Bridge12Crowd",
+      "total_orders": 90,
+      "orders_generated": 90,
+      "delivered": 12,
+      "on_time": 7,
+      "late": 5,
+      "missed": 78,
+      "delivery_rate": 13.333333333333334,
+      "on_time_rate": 58.333333333333336,
+      "total_reward": 212.3089,
+      "total_movecost": -2.4493,
+      "net_reward": 209.8596,
+      "elapsed_sec": 0.5196,
+      "shipper_rewards": [
+        2.79,
+        27.2623,
+        117.0068,
+        62.8005
+      ],
+      "status": "OK",
+      "wall_sec": 0.52
+    }
+  ]
+}

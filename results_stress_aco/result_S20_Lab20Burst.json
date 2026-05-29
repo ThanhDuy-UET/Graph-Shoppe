@@ -1,0 +1,34 @@
+{
+  "config_name": "S20_Lab20Burst",
+  "orders_total_fixed": 240,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S20_Lab20Burst",
+      "total_orders": 240,
+      "orders_generated": 240,
+      "delivered": 66,
+      "on_time": 55,
+      "late": 11,
+      "missed": 174,
+      "delivery_rate": 27.5,
+      "on_time_rate": 83.33333333333333,
+      "total_reward": 1286.4178,
+      "total_movecost": -28.8448,
+      "net_reward": 1257.573,
+      "elapsed_sec": 5.0445,
+      "shipper_rewards": [
+        100.6273,
+        37.8917,
+        233.4172,
+        125.7664,
+        353.6486,
+        127.5634,
+        278.6585
+      ],
+      "status": "OK",
+      "wall_sec": 5.05
+    }
+  ]
+}

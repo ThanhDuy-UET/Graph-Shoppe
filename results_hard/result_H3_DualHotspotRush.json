@@ -1,0 +1,107 @@
+{
+  "config_name": "H3_DualHotspotRush",
+  "orders_total_fixed": 120,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "H3_DualHotspotRush",
+      "total_orders": 120,
+      "orders_generated": 120,
+      "delivered": 59,
+      "on_time": 50,
+      "late": 9,
+      "missed": 61,
+      "delivery_rate": 49.166666666666664,
+      "on_time_rate": 84.7457627118644,
+      "total_reward": 1201.3249,
+      "total_movecost": -17.068,
+      "net_reward": 1184.2569,
+      "elapsed_sec": 1.0884,
+      "shipper_rewards": [
+        287.4355,
+        131.6343,
+        369.6247,
+        94.7087,
+        300.8537
+      ],
+      "status": "OK",
+      "wall_sec": 1.09
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "H3_DualHotspotRush",
+      "total_orders": 120,
+      "orders_generated": 120,
+      "delivered": 21,
+      "on_time": 19,
+      "late": 2,
+      "missed": 99,
+      "delivery_rate": 17.5,
+      "on_time_rate": 90.47619047619048,
+      "total_reward": 494.2845,
+      "total_movecost": -4.6226,
+      "net_reward": 489.6619,
+      "elapsed_sec": 77.0326,
+      "shipper_rewards": [
+        123.9987,
+        51.3867,
+        122.9344,
+        95.8057,
+        95.5365
+      ],
+      "status": "OK",
+      "wall_sec": 77.03
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "H3_DualHotspotRush",
+      "total_orders": 120,
+      "orders_generated": 120,
+      "delivered": 71,
+      "on_time": 64,
+      "late": 7,
+      "missed": 49,
+      "delivery_rate": 59.166666666666664,
+      "on_time_rate": 90.14084507042253,
+      "total_reward": 1363.0759,
+      "total_movecost": -21.289,
+      "net_reward": 1341.787,
+      "elapsed_sec": 2.3261,
+      "shipper_rewards": [
+        259.4094,
+        297.1163,
+        196.2995,
+        234.5441,
+        354.4177
+      ],
+      "status": "OK",
+      "wall_sec": 2.35
+    },
+    {
+      "method": "MAPD-CBS",
+      "config_name": "H3_DualHotspotRush",
+      "total_orders": 120,
+      "orders_generated": 120,
+      "delivered": 102,
+      "on_time": 80,
+      "late": 22,
+      "missed": 18,
+      "delivery_rate": 85.0,
+      "on_time_rate": 78.43137254901961,
+      "total_reward": 1652.5657,
+      "total_movecost": -23.5952,
+      "net_reward": 1628.9704,
+      "elapsed_sec": 7.73,
+      "shipper_rewards": [
+        436.5699,
+        308.8371,
+        279.5261,
+        324.0611,
+        279.9762
+      ],
+      "status": "OK",
+      "wall_sec": 7.73
+    }
+  ]
+}

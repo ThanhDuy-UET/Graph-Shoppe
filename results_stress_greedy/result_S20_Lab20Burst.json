@@ -1,0 +1,34 @@
+{
+  "config_name": "S20_Lab20Burst",
+  "orders_total_fixed": 240,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S20_Lab20Burst",
+      "total_orders": 240,
+      "orders_generated": 240,
+      "delivered": 35,
+      "on_time": 33,
+      "late": 2,
+      "missed": 205,
+      "delivery_rate": 14.583333333333334,
+      "on_time_rate": 94.28571428571429,
+      "total_reward": 758.4043,
+      "total_movecost": -13.682,
+      "net_reward": 744.7223,
+      "elapsed_sec": 11.4206,
+      "shipper_rewards": [
+        29.4193,
+        36.278,
+        35.6024,
+        309.2884,
+        67.5728,
+        184.6778,
+        81.8836
+      ],
+      "status": "OK",
+      "wall_sec": 11.43
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "config_name": "S17_Lab20Rush",
+  "orders_total_fixed": 160,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S17_Lab20Rush",
+      "total_orders": 160,
+      "orders_generated": 160,
+      "delivered": 66,
+      "on_time": 46,
+      "late": 20,
+      "missed": 94,
+      "delivery_rate": 41.25,
+      "on_time_rate": 69.6969696969697,
+      "total_reward": 1172.3956,
+      "total_movecost": -30.1471,
+      "net_reward": 1142.2485,
+      "elapsed_sec": 4.4126,
+      "shipper_rewards": [
+        242.8265,
+        265.0263,
+        167.2731,
+        392.4604,
+        74.6621
+      ],
+      "status": "OK",
+      "wall_sec": 4.42
+    }
+  ]
+}

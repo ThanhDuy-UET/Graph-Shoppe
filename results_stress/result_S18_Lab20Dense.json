@@ -1,0 +1,111 @@
+{
+  "config_name": "S18_Lab20Dense",
+  "orders_total_fixed": 190,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S18_Lab20Dense",
+      "total_orders": 190,
+      "orders_generated": 190,
+      "delivered": 53,
+      "on_time": 45,
+      "late": 8,
+      "missed": 137,
+      "delivery_rate": 27.894736842105264,
+      "on_time_rate": 84.90566037735849,
+      "total_reward": 1098.1736,
+      "total_movecost": -18.6697,
+      "net_reward": 1079.5039,
+      "elapsed_sec": 2.5579,
+      "shipper_rewards": [
+        34.0502,
+        71.1965,
+        237.113,
+        299.6101,
+        408.2349,
+        29.2992
+      ],
+      "status": "OK",
+      "wall_sec": 2.56
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "S18_Lab20Dense",
+      "total_orders": 190,
+      "orders_generated": 190,
+      "delivered": 17,
+      "on_time": 10,
+      "late": 7,
+      "missed": 173,
+      "delivery_rate": 8.947368421052632,
+      "on_time_rate": 58.8235294117647,
+      "total_reward": 275.8306,
+      "total_movecost": -5.6086,
+      "net_reward": 270.2219,
+      "elapsed_sec": 96.4562,
+      "shipper_rewards": [
+        -0.204,
+        142.0763,
+        31.1052,
+        22.1778,
+        75.2921,
+        -0.2255
+      ],
+      "status": "OK",
+      "wall_sec": 96.46
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "S18_Lab20Dense",
+      "total_orders": 190,
+      "orders_generated": 190,
+      "delivered": 30,
+      "on_time": 29,
+      "late": 1,
+      "missed": 160,
+      "delivery_rate": 15.789473684210526,
+      "on_time_rate": 96.66666666666667,
+      "total_reward": 649.9006,
+      "total_movecost": -12.8286,
+      "net_reward": 637.072,
+      "elapsed_sec": 3.6739,
+      "shipper_rewards": [
+        -0.37,
+        175.4451,
+        62.7334,
+        112.5659,
+        147.9551,
+        138.7425
+      ],
+      "status": "OK",
+      "wall_sec": 3.68
+    },
+    {
+      "method": "MAPD-CBS",
+      "config_name": "S18_Lab20Dense",
+      "total_orders": 190,
+      "orders_generated": 190,
+      "delivered": 109,
+      "on_time": 94,
+      "late": 15,
+      "missed": 81,
+      "delivery_rate": 57.36842105263158,
+      "on_time_rate": 86.23853211009174,
+      "total_reward": 2009.3804,
+      "total_movecost": -40.6263,
+      "net_reward": 1968.7541,
+      "elapsed_sec": 28.7871,
+      "shipper_rewards": [
+        162.9791,
+        594.8459,
+        310.9101,
+        277.8282,
+        373.2843,
+        248.9066
+      ],
+      "status": "OK",
+      "wall_sec": 28.79
+    }
+  ]
+}

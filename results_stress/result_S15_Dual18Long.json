@@ -1,0 +1,111 @@
+{
+  "config_name": "S15_Dual18Long",
+  "orders_total_fixed": 180,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S15_Dual18Long",
+      "total_orders": 180,
+      "orders_generated": 180,
+      "delivered": 57,
+      "on_time": 48,
+      "late": 9,
+      "missed": 123,
+      "delivery_rate": 31.666666666666668,
+      "on_time_rate": 84.21052631578948,
+      "total_reward": 1181.8868,
+      "total_movecost": -18.5048,
+      "net_reward": 1163.382,
+      "elapsed_sec": 1.9396,
+      "shipper_rewards": [
+        137.418,
+        105.3637,
+        57.5287,
+        235.289,
+        328.3229,
+        299.4597
+      ],
+      "status": "OK",
+      "wall_sec": 1.94
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "S15_Dual18Long",
+      "total_orders": 180,
+      "orders_generated": 180,
+      "delivered": 48,
+      "on_time": 31,
+      "late": 17,
+      "missed": 132,
+      "delivery_rate": 26.666666666666668,
+      "on_time_rate": 64.58333333333333,
+      "total_reward": 800.3891,
+      "total_movecost": -8.5569,
+      "net_reward": 791.8322,
+      "elapsed_sec": 111.151,
+      "shipper_rewards": [
+        13.8619,
+        -0.2258,
+        23.0651,
+        305.773,
+        419.0604,
+        30.2975
+      ],
+      "status": "OK",
+      "wall_sec": 111.15
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "S15_Dual18Long",
+      "total_orders": 180,
+      "orders_generated": 180,
+      "delivered": 59,
+      "on_time": 55,
+      "late": 4,
+      "missed": 121,
+      "delivery_rate": 32.77777777777778,
+      "on_time_rate": 93.22033898305085,
+      "total_reward": 1279.5769,
+      "total_movecost": -19.8579,
+      "net_reward": 1259.719,
+      "elapsed_sec": 3.7188,
+      "shipper_rewards": [
+        200.9686,
+        264.128,
+        121.4806,
+        167.8841,
+        242.2419,
+        263.0158
+      ],
+      "status": "OK",
+      "wall_sec": 3.72
+    },
+    {
+      "method": "MAPD-CBS",
+      "config_name": "S15_Dual18Long",
+      "total_orders": 180,
+      "orders_generated": 180,
+      "delivered": 171,
+      "on_time": 154,
+      "late": 17,
+      "missed": 9,
+      "delivery_rate": 95.0,
+      "on_time_rate": 90.05847953216374,
+      "total_reward": 3110.3212,
+      "total_movecost": -40.0336,
+      "net_reward": 3070.2876,
+      "elapsed_sec": 14.6171,
+      "shipper_rewards": [
+        520.4998,
+        568.0072,
+        444.7815,
+        500.1156,
+        545.5816,
+        491.3019
+      ],
+      "status": "OK",
+      "wall_sec": 14.62
+    }
+  ]
+}

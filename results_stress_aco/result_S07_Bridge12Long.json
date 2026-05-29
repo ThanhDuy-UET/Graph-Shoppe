@@ -1,0 +1,31 @@
+{
+  "config_name": "S07_Bridge12Long",
+  "orders_total_fixed": 100,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S07_Bridge12Long",
+      "total_orders": 100,
+      "orders_generated": 100,
+      "delivered": 74,
+      "on_time": 67,
+      "late": 7,
+      "missed": 26,
+      "delivery_rate": 74.0,
+      "on_time_rate": 90.54054054054055,
+      "total_reward": 1574.696,
+      "total_movecost": -13.2075,
+      "net_reward": 1561.4885,
+      "elapsed_sec": 1.1279,
+      "shipper_rewards": [
+        267.6439,
+        490.6395,
+        420.6528,
+        382.5523
+      ],
+      "status": "OK",
+      "wall_sec": 1.13
+    }
+  ]
+}

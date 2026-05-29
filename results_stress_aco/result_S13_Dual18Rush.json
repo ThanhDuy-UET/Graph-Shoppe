@@ -1,0 +1,32 @@
+{
+  "config_name": "S13_Dual18Rush",
+  "orders_total_fixed": 140,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S13_Dual18Rush",
+      "total_orders": 140,
+      "orders_generated": 140,
+      "delivered": 28,
+      "on_time": 25,
+      "late": 3,
+      "missed": 112,
+      "delivery_rate": 20.0,
+      "on_time_rate": 89.28571428571429,
+      "total_reward": 641.7213,
+      "total_movecost": -10.25,
+      "net_reward": 631.4713,
+      "elapsed_sec": 2.7184,
+      "shipper_rewards": [
+        -0.2345,
+        249.2702,
+        -0.2463,
+        198.9999,
+        183.6821
+      ],
+      "status": "OK",
+      "wall_sec": 2.72
+    }
+  ]
+}
