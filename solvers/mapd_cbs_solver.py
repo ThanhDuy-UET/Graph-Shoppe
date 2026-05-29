@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import time
 from collections import deque
-from typing import Dict, Iterable, List, Optional, Set, Tuple
+from typing import Deque, Dict, Iterable, List, Optional, Set, Tuple
 
 from env import DeliveryEnv, Order, Shipper, delivery_reward, is_valid_cell, valid_next_pos
 from solvers.solver import Solver
@@ -25,20 +25,47 @@ class MAPDCBSSolver(Solver):
     def __init__(self, env: DeliveryEnv):
         super().__init__(env)
         self.strategy = os.getenv("MAPD_CBS_STRATEGY", "best")
+        self._neighbor_cache: Dict[Tuple[Position, bool], Tuple[Tuple[Move, Position], ...]] = {}
+        self._distance_map_cache: Dict[Position, Dict[Position, int]] = {}
         self._distance_cache: Dict[Tuple[Position, Position], int] = {}
         self._next_move_cache: Dict[Tuple[Position, Position], Move] = {}
         self._seen_order_ids: Set[int] = set()
         self._source_scores: Dict[Position, float] = {}
+        self.large_scale = env.G >= 1000 or env.C >= 18 or env.N >= 60
+        self.small_surge_scale = (
+            not self.large_scale and env.G >= 200 and env.G <= 400 and env.C >= 7
+        )
+        self.medium_scale = (
+            not self.large_scale
+            and not self.small_surge_scale
+            and (env.G >= 200 or env.C >= 8 or env.N >= 25)
+        )
+        self.max_pickup_candidates = (
+            max(96, min(240, 6 * env.C + 60))
+            if (self.large_scale or self.small_surge_scale)
+            else 10**9
+        )
+        self._recent_order_counts: Deque[int] = deque(maxlen=60)
+        self._surge_level = 0.0
+        self._hotspot_targets: List[Position] = []
 
     # ------------------------------------------------------------------
     # Static grid BFS
     # ------------------------------------------------------------------
     def _neighbors(self, pos: Position, include_wait: bool = False) -> Iterable[Tuple[Move, Position]]:
+        key = (pos, include_wait)
+        if key in self._neighbor_cache:
+            return self._neighbor_cache[key]
+
         moves = MOVES if include_wait else MOVES[1:]
+        neighbors: List[Tuple[Move, Position]] = []
         for move in moves:
             nxt = valid_next_pos(pos, move, self.grid)
             if move == "S" or nxt != pos:
-                yield move, nxt
+                neighbors.append((move, nxt))
+
+        self._neighbor_cache[key] = tuple(neighbors)
+        return self._neighbor_cache[key]
 
     def _bfs_parents(
         self,
@@ -72,21 +99,7 @@ class MAPDCBSSolver(Solver):
         if key in self._distance_cache:
             return self._distance_cache[key]
 
-        parent = self._bfs_parents(start, goal)
-        if parent is None or goal not in parent:
-            self._distance_cache[key] = INF
-            return INF
-
-        distance = 0
-        current = goal
-        while current != start:
-            previous, _ = parent[current]
-            if previous is None:
-                self._distance_cache[key] = INF
-                return INF
-            current = previous
-            distance += 1
-
+        distance = self._distance_map(start).get(goal, INF)
         self._distance_cache[key] = distance
         return distance
 
@@ -98,21 +111,40 @@ class MAPDCBSSolver(Solver):
         if key in self._next_move_cache:
             return self._next_move_cache[key]
 
-        parent = self._bfs_parents(start, goal)
-        if parent is None or goal not in parent:
-            self._next_move_cache[key] = "S"
-            return "S"
+        dist_to_goal = self._distance_map(goal)
+        best_move = "S"
+        best_dist = dist_to_goal.get(start, INF)
 
-        current = goal
-        while True:
-            previous, move = parent[current]
-            if previous is None:
-                self._next_move_cache[key] = "S"
-                return "S"
-            if previous == start:
-                self._next_move_cache[key] = move
-                return move
-            current = previous
+        for move, nxt in self._neighbors(start):
+            nxt_dist = dist_to_goal.get(nxt, INF)
+            if nxt_dist < best_dist:
+                best_dist = nxt_dist
+                best_move = move
+
+        self._next_move_cache[key] = best_move
+        return best_move
+
+    def _distance_map(self, start: Position) -> Dict[Position, int]:
+        if start in self._distance_map_cache:
+            return self._distance_map_cache[start]
+
+        if not is_valid_cell(start, self.grid):
+            self._distance_map_cache[start] = {}
+            return self._distance_map_cache[start]
+
+        queue: deque[Position] = deque([start])
+        dist: Dict[Position, int] = {start: 0}
+
+        while queue:
+            current = queue.popleft()
+            for _, nxt in self._neighbors(current):
+                if nxt in dist:
+                    continue
+                dist[nxt] = dist[current] + 1
+                queue.append(nxt)
+
+        self._distance_map_cache[start] = dist
+        return dist
 
     # ------------------------------------------------------------------
     # Task assignment
@@ -125,6 +157,50 @@ class MAPDCBSSolver(Solver):
             source = (order.sx, order.sy)
             self._source_scores[source] = self._source_scores.get(source, 0.0) + 1.0 + 0.7 * order.p
 
+    def _update_demand_model(self, obs: dict) -> None:
+        orders: Dict[int, Order] = obs["orders"]
+        if not self.large_scale and not self.medium_scale and not self.small_surge_scale:
+            self._remember_sources(orders)
+            return
+
+        new_order_ids = list(obs.get("new_order_ids", []))
+        self._recent_order_counts.append(len(new_order_ids))
+        expected_rate = max(self.env.G / max(self.env.T, 1), 1e-9)
+        recent_rate = sum(self._recent_order_counts) / max(len(self._recent_order_counts), 1)
+        self._surge_level = max(0.0, min(3.0, recent_rate / expected_rate - 1.0))
+
+        t = int(obs.get("t", 0))
+        if t % 8 == 0 and self._source_scores:
+            decay = 0.92 if self._surge_level > 0.5 else 0.96
+            stale = []
+            for pos, score in self._source_scores.items():
+                score *= decay
+                if score < 0.05:
+                    stale.append(pos)
+                else:
+                    self._source_scores[pos] = score
+            for pos in stale:
+                self._source_scores.pop(pos, None)
+
+        for oid in new_order_ids:
+            order = orders.get(oid)
+            if order is None:
+                continue
+            self._seen_order_ids.add(order.id)
+            source = (order.sx, order.sy)
+            boost = 1.0 + 0.8 * order.p + 0.4 * self._surge_level
+            self._source_scores[source] = self._source_scores.get(source, 0.0) + boost
+
+        if new_order_ids or not self._hotspot_targets:
+            self._hotspot_targets = [
+                pos
+                for pos, _ in sorted(
+                    self._source_scores.items(),
+                    key=lambda item: item[1],
+                    reverse=True,
+                )[: min(10, max(3, self.env.C // 2))]
+            ]
+
     def _idle_target(self, shipper: Shipper, claimed_targets: Optional[Set[Position]] = None) -> Optional[Position]:
         claimed_targets = claimed_targets or set()
         if not self._source_scores:
@@ -133,13 +209,19 @@ class MAPDCBSSolver(Solver):
 
         best_target: Optional[Position] = None
         best_score = float("-inf")
-        for pos, source_score in self._source_scores.items():
+        candidate_targets = (
+            self._hotspot_targets
+            if (self.large_scale or self.medium_scale or self.small_surge_scale) and self._hotspot_targets
+            else list(self._source_scores)
+        )
+        for pos in candidate_targets:
             if pos in claimed_targets:
                 continue
+            source_score = self._source_scores.get(pos, 0.0)
             dist = self._distance(shipper.position, pos)
             if dist >= INF or dist == 0:
                 continue
-            distance_weight = 0.10 if self.env.N == 15 else 0.20
+            distance_weight = 0.04 if (self.large_scale or self.medium_scale or self.small_surge_scale) else (0.10 if self.env.N == 15 else 0.20)
             score = source_score - distance_weight * dist
             if score > best_score:
                 best_score = score
@@ -229,6 +311,47 @@ class MAPDCBSSolver(Solver):
             key=lambda order: (self._delivery_score(shipper, order, t), order.et, -order.p, order.id),
         )
 
+    def _candidate_pickups(
+        self,
+        shipper: Shipper,
+        orders: Dict[int, Order],
+        excluded_orders: Optional[Set[int]] = None,
+    ) -> List[Order]:
+        excluded_orders = excluded_orders or set()
+        candidates = [
+            order
+            for order in orders.values()
+            if order.id not in excluded_orders and shipper.can_carry(order, orders)
+        ]
+
+        if len(candidates) <= self.max_pickup_candidates:
+            return candidates
+
+        sr, sc = shipper.position
+
+        def cheap_score(order: Order) -> Tuple[float, int, int]:
+            pickup = (order.sx, order.sy)
+            manhattan_dist = abs(sr - order.sx) + abs(sc - order.sy)
+            source_score = self._source_scores.get(pickup, 0.0)
+            hotspot_dist = min(
+                (abs(order.sx - hx) + abs(order.sy - hy) for hx, hy in self._hotspot_targets),
+                default=self.env.N,
+            )
+            urgency = max(0, order.et)
+            rank = (
+                manhattan_dist
+                + 0.03 * urgency
+                + 0.20 * hotspot_dist
+                - 4.0 * order.p
+                - 0.30 * source_score
+            )
+            return rank, order.et, order.id
+
+        candidates.sort(
+            key=cheap_score
+        )
+        return candidates[: self.max_pickup_candidates]
+
     def _select_pickup(
         self,
         shipper: Shipper,
@@ -238,11 +361,7 @@ class MAPDCBSSolver(Solver):
     ) -> Optional[Order]:
         candidates: List[Order] = []
 
-        for order in orders.values():
-            if order.id in reserved_orders:
-                continue
-            if not shipper.can_carry(order, orders):
-                continue
+        for order in self._candidate_pickups(shipper, orders, reserved_orders):
             to_pickup = self._distance(shipper.position, (order.sx, order.sy))
             to_dropoff = self._distance((order.sx, order.sy), (order.ex, order.ey))
             if to_pickup >= INF or to_dropoff >= INF:
@@ -341,9 +460,7 @@ class MAPDCBSSolver(Solver):
                 continue
 
             delivery_score = delivery_score_by_shipper.get(shipper.id)
-            for order in orders.values():
-                if not shipper.can_carry(order, orders):
-                    continue
+            for order in self._candidate_pickups(shipper, orders):
                 score = self._pickup_score(shipper, order, orders, t)
                 if score >= INF:
                     continue
@@ -405,9 +522,7 @@ class MAPDCBSSolver(Solver):
         for shipper in shippers:
             if shipper.id in tasks:
                 continue
-            for order in orders.values():
-                if not shipper.can_carry(order, orders):
-                    continue
+            for order in self._candidate_pickups(shipper, orders):
                 score = self._pickup_score(shipper, order, orders, t)
                 if score >= INF:
                     continue
@@ -436,6 +551,17 @@ class MAPDCBSSolver(Solver):
         if self.env.N >= 15 or self.env.C <= 2:
             return self._assign_tasks_empty_auction(obs)
         return self._assign_tasks_sequential(obs)
+
+    def _planning_horizon(self) -> int:
+        if self.small_surge_scale:
+            return 20
+        if not self.large_scale:
+            return min(30, max(8, self.env.N * 2))
+        if self.env.G >= 1000 or self.env.C >= 18:
+            return 18
+        if self.env.G >= 600 or self.env.C >= 12:
+            return 24
+        return 20
 
     # ------------------------------------------------------------------
     # CBS-style time-expanded planning
@@ -493,7 +619,7 @@ class MAPDCBSSolver(Solver):
         blocked_edges: Set[Tuple[int, Position, Position]],
         horizon: int,
     ) -> None:
-        reserve_horizon = min(horizon, max(1, len(path) - 1)) if self.env.N == 18 else horizon
+        reserve_horizon = min(horizon, max(1, len(path) - 1))
         for t in range(1, reserve_horizon + 1):
             prev = path[min(t - 1, len(path) - 1)]
             cur = path[min(t, len(path) - 1)]
@@ -531,24 +657,34 @@ class MAPDCBSSolver(Solver):
         orders: Dict[int, Order] = obs["orders"]
         shippers: List[Shipper] = obs["shippers"]
         t = int(obs.get("t", 0))
+        self._update_demand_model(obs)
         tasks = self._assign_tasks(obs)
-        self._remember_sources(orders)
 
         actions: Dict[int, Action] = {shipper.id: ("S", 0) for shipper in shippers}
         blocked_vertices: Set[Tuple[int, Position]] = set()
         blocked_edges: Set[Tuple[int, Position, Position]] = set()
-        horizon = min(30, max(8, self.env.N * 2))
+        horizon = self._planning_horizon()
 
-        allow_idle = self.env.N >= 20 or (self.env.N == 15 and t < self.env.T - 30)
+        allow_idle = (
+            self.env.N >= 20
+            or (self.env.N == 15 and t < self.env.T - 30)
+        )
+        if self.large_scale or self.small_surge_scale:
+            allow_idle = bool(self._hotspot_targets) and (self._surge_level > 0.15 or t < self.env.T * 0.8)
         if allow_idle:
             claimed_idle_targets: Set[Position] = set()
+            idle_limit = max(2, min(8, self.env.C // 3)) if (self.large_scale or self.small_surge_scale) else self.env.C
+            idle_count = 0
             for shipper in shippers:
                 if shipper.id in tasks:
                     continue
+                if idle_count >= idle_limit:
+                    break
                 target = self._idle_target(shipper, claimed_idle_targets)
                 if target is not None:
                     tasks[shipper.id] = ("idle", -1, target)
                     claimed_idle_targets.add(target)
+                    idle_count += 1
 
         active_shippers = [shipper for shipper in shippers if shipper.id in tasks]
         active_shippers.sort(key=lambda shipper: self._task_priority(shipper, tasks[shipper.id], orders, t))
