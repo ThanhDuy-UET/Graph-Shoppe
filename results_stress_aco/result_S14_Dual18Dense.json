@@ -1,0 +1,33 @@
+{
+  "config_name": "S14_Dual18Dense",
+  "orders_total_fixed": 165,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S14_Dual18Dense",
+      "total_orders": 165,
+      "orders_generated": 165,
+      "delivered": 62,
+      "on_time": 55,
+      "late": 7,
+      "missed": 103,
+      "delivery_rate": 37.57575757575758,
+      "on_time_rate": 88.70967741935483,
+      "total_reward": 1403.2501,
+      "total_movecost": -19.4528,
+      "net_reward": 1383.7972,
+      "elapsed_sec": 2.7108,
+      "shipper_rewards": [
+        122.5673,
+        278.7013,
+        324.6378,
+        90.8466,
+        367.6126,
+        199.4317
+      ],
+      "status": "OK",
+      "wall_sec": 2.72
+    }
+  ]
+}

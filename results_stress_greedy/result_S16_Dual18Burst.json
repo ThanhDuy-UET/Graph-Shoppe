@@ -1,0 +1,34 @@
+{
+  "config_name": "S16_Dual18Burst",
+  "orders_total_fixed": 200,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S16_Dual18Burst",
+      "total_orders": 200,
+      "orders_generated": 200,
+      "delivered": 46,
+      "on_time": 42,
+      "late": 4,
+      "missed": 154,
+      "delivery_rate": 23.0,
+      "on_time_rate": 91.30434782608695,
+      "total_reward": 1056.8514,
+      "total_movecost": -16.887,
+      "net_reward": 1039.9645,
+      "elapsed_sec": 2.5293,
+      "shipper_rewards": [
+        140.5378,
+        90.6367,
+        76.0416,
+        135.1813,
+        21.422,
+        466.1016,
+        110.0435
+      ],
+      "status": "OK",
+      "wall_sec": 2.53
+    }
+  ]
+}

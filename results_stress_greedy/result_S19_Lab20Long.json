@@ -1,0 +1,33 @@
+{
+  "config_name": "S19_Lab20Long",
+  "orders_total_fixed": 210,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S19_Lab20Long",
+      "total_orders": 210,
+      "orders_generated": 210,
+      "delivered": 61,
+      "on_time": 48,
+      "late": 13,
+      "missed": 149,
+      "delivery_rate": 29.047619047619047,
+      "on_time_rate": 78.68852459016394,
+      "total_reward": 1228.616,
+      "total_movecost": -23.6943,
+      "net_reward": 1204.9217,
+      "elapsed_sec": 4.4943,
+      "shipper_rewards": [
+        151.7716,
+        177.7451,
+        446.7828,
+        181.1071,
+        43.4902,
+        204.025
+      ],
+      "status": "OK",
+      "wall_sec": 4.5
+    }
+  ]
+}

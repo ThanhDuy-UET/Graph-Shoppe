@@ -1,0 +1,107 @@
+{
+  "config_name": "S08_Bridge12Burst",
+  "orders_total_fixed": 115,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S08_Bridge12Burst",
+      "total_orders": 115,
+      "orders_generated": 115,
+      "delivered": 25,
+      "on_time": 23,
+      "late": 2,
+      "missed": 90,
+      "delivery_rate": 21.73913043478261,
+      "on_time_rate": 92.0,
+      "total_reward": 699.5117,
+      "total_movecost": -4.5975,
+      "net_reward": 694.9142,
+      "elapsed_sec": 0.5261,
+      "shipper_rewards": [
+        139.8675,
+        91.4024,
+        183.3882,
+        245.3563,
+        34.8997
+      ],
+      "status": "OK",
+      "wall_sec": 0.53
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "S08_Bridge12Burst",
+      "total_orders": 115,
+      "orders_generated": 115,
+      "delivered": 29,
+      "on_time": 20,
+      "late": 9,
+      "missed": 86,
+      "delivery_rate": 25.217391304347824,
+      "on_time_rate": 68.96551724137932,
+      "total_reward": 608.3162,
+      "total_movecost": -2.9648,
+      "net_reward": 605.3514,
+      "elapsed_sec": 58.306,
+      "shipper_rewards": [
+        37.8013,
+        44.7968,
+        73.9413,
+        352.5987,
+        96.2132
+      ],
+      "status": "OK",
+      "wall_sec": 58.31
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "S08_Bridge12Burst",
+      "total_orders": 115,
+      "orders_generated": 115,
+      "delivered": 22,
+      "on_time": 19,
+      "late": 3,
+      "missed": 93,
+      "delivery_rate": 19.130434782608695,
+      "on_time_rate": 86.36363636363636,
+      "total_reward": 535.298,
+      "total_movecost": -4.4525,
+      "net_reward": 530.8454,
+      "elapsed_sec": 1.0936,
+      "shipper_rewards": [
+        87.7678,
+        91.0777,
+        147.1318,
+        159.3367,
+        45.5314
+      ],
+      "status": "OK",
+      "wall_sec": 1.1
+    },
+    {
+      "method": "MAPD-CBS",
+      "config_name": "S08_Bridge12Burst",
+      "total_orders": 115,
+      "orders_generated": 115,
+      "delivered": 105,
+      "on_time": 99,
+      "late": 6,
+      "missed": 10,
+      "delivery_rate": 91.30434782608695,
+      "on_time_rate": 94.28571428571429,
+      "total_reward": 2312.3826,
+      "total_movecost": -16.5314,
+      "net_reward": 2295.8512,
+      "elapsed_sec": 2.3847,
+      "shipper_rewards": [
+        655.1057,
+        625.7096,
+        516.977,
+        297.8983,
+        200.1605
+      ],
+      "status": "OK",
+      "wall_sec": 2.39
+    }
+  ]
+}

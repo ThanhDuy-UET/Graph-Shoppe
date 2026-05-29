@@ -1,0 +1,111 @@
+{
+  "config_name": "S14_Dual18Dense",
+  "orders_total_fixed": 165,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S14_Dual18Dense",
+      "total_orders": 165,
+      "orders_generated": 165,
+      "delivered": 36,
+      "on_time": 33,
+      "late": 3,
+      "missed": 129,
+      "delivery_rate": 21.818181818181817,
+      "on_time_rate": 91.66666666666667,
+      "total_reward": 847.6419,
+      "total_movecost": -10.4626,
+      "net_reward": 837.1793,
+      "elapsed_sec": 1.5506,
+      "shipper_rewards": [
+        15.9357,
+        10.4339,
+        324.3029,
+        50.9761,
+        104.5219,
+        331.0088
+      ],
+      "status": "OK",
+      "wall_sec": 1.56
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "S14_Dual18Dense",
+      "total_orders": 165,
+      "orders_generated": 165,
+      "delivered": 24,
+      "on_time": 14,
+      "late": 10,
+      "missed": 141,
+      "delivery_rate": 14.545454545454545,
+      "on_time_rate": 58.333333333333336,
+      "total_reward": 335.2594,
+      "total_movecost": -4.4356,
+      "net_reward": 330.8238,
+      "elapsed_sec": 120.455,
+      "shipper_rewards": [
+        7.1436,
+        -0.186,
+        48.7651,
+        26.5986,
+        248.76,
+        -0.2575
+      ],
+      "status": "OK",
+      "wall_sec": 120.46
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "S14_Dual18Dense",
+      "total_orders": 165,
+      "orders_generated": 165,
+      "delivered": 62,
+      "on_time": 55,
+      "late": 7,
+      "missed": 103,
+      "delivery_rate": 37.57575757575758,
+      "on_time_rate": 88.70967741935483,
+      "total_reward": 1403.2501,
+      "total_movecost": -19.4528,
+      "net_reward": 1383.7972,
+      "elapsed_sec": 2.7191,
+      "shipper_rewards": [
+        122.5673,
+        278.7013,
+        324.6378,
+        90.8466,
+        367.6126,
+        199.4317
+      ],
+      "status": "OK",
+      "wall_sec": 2.72
+    },
+    {
+      "method": "MAPD-CBS",
+      "config_name": "S14_Dual18Dense",
+      "total_orders": 165,
+      "orders_generated": 165,
+      "delivered": 159,
+      "on_time": 136,
+      "late": 23,
+      "missed": 6,
+      "delivery_rate": 96.36363636363636,
+      "on_time_rate": 85.53459119496856,
+      "total_reward": 3001.0485,
+      "total_movecost": -36.5124,
+      "net_reward": 2964.5361,
+      "elapsed_sec": 12.5764,
+      "shipper_rewards": [
+        356.2712,
+        498.5967,
+        409.0084,
+        522.1893,
+        572.8347,
+        605.6359
+      ],
+      "status": "OK",
+      "wall_sec": 12.58
+    }
+  ]
+}

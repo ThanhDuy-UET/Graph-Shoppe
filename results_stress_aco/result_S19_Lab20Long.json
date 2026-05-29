@@ -1,0 +1,33 @@
+{
+  "config_name": "S19_Lab20Long",
+  "orders_total_fixed": 210,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S19_Lab20Long",
+      "total_orders": 210,
+      "orders_generated": 210,
+      "delivered": 74,
+      "on_time": 63,
+      "late": 11,
+      "missed": 136,
+      "delivery_rate": 35.23809523809524,
+      "on_time_rate": 85.13513513513513,
+      "total_reward": 1442.3774,
+      "total_movecost": -40.2284,
+      "net_reward": 1402.149,
+      "elapsed_sec": 4.7358,
+      "shipper_rewards": [
+        164.9752,
+        247.7091,
+        353.5891,
+        350.2478,
+        170.1119,
+        115.5159
+      ],
+      "status": "OK",
+      "wall_sec": 4.74
+    }
+  ]
+}

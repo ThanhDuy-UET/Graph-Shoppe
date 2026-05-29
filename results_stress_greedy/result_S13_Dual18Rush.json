@@ -1,0 +1,32 @@
+{
+  "config_name": "S13_Dual18Rush",
+  "orders_total_fixed": 140,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S13_Dual18Rush",
+      "total_orders": 140,
+      "orders_generated": 140,
+      "delivered": 20,
+      "on_time": 17,
+      "late": 3,
+      "missed": 120,
+      "delivery_rate": 14.285714285714286,
+      "on_time_rate": 85.0,
+      "total_reward": 424.9993,
+      "total_movecost": -7.1015,
+      "net_reward": 417.8978,
+      "elapsed_sec": 1.3017,
+      "shipper_rewards": [
+        85.8456,
+        83.4065,
+        21.0573,
+        26.6328,
+        200.9556
+      ],
+      "status": "OK",
+      "wall_sec": 1.31
+    }
+  ]
+}

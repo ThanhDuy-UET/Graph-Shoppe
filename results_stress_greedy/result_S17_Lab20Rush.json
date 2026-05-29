@@ -1,0 +1,32 @@
+{
+  "config_name": "S17_Lab20Rush",
+  "orders_total_fixed": 160,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S17_Lab20Rush",
+      "total_orders": 160,
+      "orders_generated": 160,
+      "delivered": 28,
+      "on_time": 23,
+      "late": 5,
+      "missed": 132,
+      "delivery_rate": 17.5,
+      "on_time_rate": 82.14285714285714,
+      "total_reward": 649.7329,
+      "total_movecost": -13.4181,
+      "net_reward": 636.3148,
+      "elapsed_sec": 2.2591,
+      "shipper_rewards": [
+        144.9538,
+        4.387,
+        200.7416,
+        223.373,
+        62.8595
+      ],
+      "status": "OK",
+      "wall_sec": 2.26
+    }
+  ]
+}

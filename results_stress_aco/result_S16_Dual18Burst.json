@@ -1,0 +1,34 @@
+{
+  "config_name": "S16_Dual18Burst",
+  "orders_total_fixed": 200,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S16_Dual18Burst",
+      "total_orders": 200,
+      "orders_generated": 200,
+      "delivered": 79,
+      "on_time": 65,
+      "late": 14,
+      "missed": 121,
+      "delivery_rate": 39.5,
+      "on_time_rate": 82.27848101265823,
+      "total_reward": 1608.1499,
+      "total_movecost": -28.4802,
+      "net_reward": 1579.6697,
+      "elapsed_sec": 4.5764,
+      "shipper_rewards": [
+        14.5351,
+        301.6532,
+        171.7604,
+        158.5855,
+        398.8337,
+        228.4359,
+        305.8659
+      ],
+      "status": "OK",
+      "wall_sec": 4.58
+    }
+  ]
+}

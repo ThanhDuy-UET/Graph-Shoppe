@@ -1,0 +1,33 @@
+{
+  "config_name": "S15_Dual18Long",
+  "orders_total_fixed": 180,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S15_Dual18Long",
+      "total_orders": 180,
+      "orders_generated": 180,
+      "delivered": 57,
+      "on_time": 48,
+      "late": 9,
+      "missed": 123,
+      "delivery_rate": 31.666666666666668,
+      "on_time_rate": 84.21052631578948,
+      "total_reward": 1181.8868,
+      "total_movecost": -18.5048,
+      "net_reward": 1163.382,
+      "elapsed_sec": 2.0178,
+      "shipper_rewards": [
+        137.418,
+        105.3637,
+        57.5287,
+        235.289,
+        328.3229,
+        299.4597
+      ],
+      "status": "OK",
+      "wall_sec": 2.02
+    }
+  ]
+}

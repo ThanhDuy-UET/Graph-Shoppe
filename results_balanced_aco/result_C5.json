@@ -1,0 +1,32 @@
+{
+  "config_name": "C5",
+  "orders_total_fixed": 80,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "C5",
+      "total_orders": 80,
+      "orders_generated": 80,
+      "delivered": 56,
+      "on_time": 50,
+      "late": 6,
+      "missed": 24,
+      "delivery_rate": 70.0,
+      "on_time_rate": 89.28571428571429,
+      "total_reward": 1113.028,
+      "total_movecost": -26.4141,
+      "net_reward": 1086.614,
+      "elapsed_sec": 1.6736,
+      "shipper_rewards": [
+        240.5048,
+        254.7543,
+        310.2716,
+        142.7819,
+        138.3013
+      ],
+      "status": "OK",
+      "wall_sec": 1.68
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "config_name": "S19_Lab20Long",
+  "orders_total_fixed": 210,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S19_Lab20Long",
+      "total_orders": 210,
+      "orders_generated": 210,
+      "delivered": 61,
+      "on_time": 48,
+      "late": 13,
+      "missed": 149,
+      "delivery_rate": 29.047619047619047,
+      "on_time_rate": 78.68852459016394,
+      "total_reward": 1228.616,
+      "total_movecost": -23.6943,
+      "net_reward": 1204.9217,
+      "elapsed_sec": 4.6055,
+      "shipper_rewards": [
+        151.7716,
+        177.7451,
+        446.7828,
+        181.1071,
+        43.4902,
+        204.025
+      ],
+      "status": "OK",
+      "wall_sec": 4.61
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "S19_Lab20Long",
+      "total_orders": 210,
+      "orders_generated": 210,
+      "delivered": 35,
+      "on_time": 26,
+      "late": 9,
+      "missed": 175,
+      "delivery_rate": 16.666666666666668,
+      "on_time_rate": 74.28571428571429,
+      "total_reward": 560.1406,
+      "total_movecost": -9.2297,
+      "net_reward": 550.9109,
+      "elapsed_sec": 143.5793,
+      "shipper_rewards": [
+        92.7876,
+        98.276,
+        56.749,
+        167.3437,
+        110.6862,
+        25.0684
+      ],
+      "status": "OK",
+      "wall_sec": 143.58
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "S19_Lab20Long",
+      "total_orders": 210,
+      "orders_generated": 210,
+      "delivered": 74,
+      "on_time": 63,
+      "late": 11,
+      "missed": 136,
+      "delivery_rate": 35.23809523809524,
+      "on_time_rate": 85.13513513513513,
+      "total_reward": 1442.3774,
+      "total_movecost": -40.2284,
+      "net_reward": 1402.149,
+      "elapsed_sec": 5.2395,
+      "shipper_rewards": [
+        164.9752,
+        247.7091,
+        353.5891,
+        350.2478,
+        170.1119,
+        115.5159
+      ],
+      "status": "OK",
+      "wall_sec": 5.25
+    },
+    {
+      "method": "MAPD-CBS",
+      "config_name": "S19_Lab20Long",
+      "total_orders": 210,
+      "orders_generated": 210,
+      "delivered": 179,
+      "on_time": 137,
+      "late": 42,
+      "missed": 31,
+      "delivery_rate": 85.23809523809524,
+      "on_time_rate": 76.53631284916202,
+      "total_reward": 2965.1258,
+      "total_movecost": -68.7542,
+      "net_reward": 2896.3716,
+      "elapsed_sec": 42.2428,
+      "shipper_rewards": [
+        457.7093,
+        470.3376,
+        468.5427,
+        650.7871,
+        338.6222,
+        510.3728
+      ],
+      "status": "OK",
+      "wall_sec": 42.25
+    }
+  ]
+}

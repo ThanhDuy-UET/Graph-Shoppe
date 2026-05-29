@@ -1,0 +1,30 @@
+{
+  "config_name": "C3",
+  "orders_total_fixed": 40,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "C3",
+      "total_orders": 40,
+      "orders_generated": 40,
+      "delivered": 30,
+      "on_time": 24,
+      "late": 6,
+      "missed": 10,
+      "delivery_rate": 75.0,
+      "on_time_rate": 80.0,
+      "total_reward": 644.3756,
+      "total_movecost": -5.3062,
+      "net_reward": 639.0694,
+      "elapsed_sec": 0.2856,
+      "shipper_rewards": [
+        219.1106,
+        159.1233,
+        260.8355
+      ],
+      "status": "OK",
+      "wall_sec": 0.29
+    }
+  ]
+}

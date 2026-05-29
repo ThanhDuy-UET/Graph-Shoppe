@@ -1,0 +1,31 @@
+{
+  "config_name": "S06_Bridge12Crowd",
+  "orders_total_fixed": 90,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S06_Bridge12Crowd",
+      "total_orders": 90,
+      "orders_generated": 90,
+      "delivered": 19,
+      "on_time": 17,
+      "late": 2,
+      "missed": 71,
+      "delivery_rate": 21.11111111111111,
+      "on_time_rate": 89.47368421052632,
+      "total_reward": 354.5218,
+      "total_movecost": -2.7625,
+      "net_reward": 351.7593,
+      "elapsed_sec": 0.7325,
+      "shipper_rewards": [
+        -0.105,
+        186.0981,
+        148.916,
+        16.8502
+      ],
+      "status": "OK",
+      "wall_sec": 0.73
+    }
+  ]
+}

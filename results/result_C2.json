@@ -4,6 +4,72 @@
   "online_generation": true,
   "results": [
     {
+      "method": "GreedyBFS",
+      "config_name": "C2",
+      "total_orders": 25,
+      "orders_generated": 25,
+      "delivered": 23,
+      "on_time": 23,
+      "late": 0,
+      "missed": 2,
+      "delivery_rate": 92.0,
+      "on_time_rate": 100.0,
+      "total_reward": 490.0741,
+      "total_movecost": -2.5629,
+      "net_reward": 487.5111,
+      "elapsed_sec": 0.0627,
+      "shipper_rewards": [
+        186.9812,
+        300.5299
+      ],
+      "status": "OK",
+      "wall_sec": 0.06
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "C2",
+      "total_orders": 25,
+      "orders_generated": 25,
+      "delivered": 20,
+      "on_time": 20,
+      "late": 0,
+      "missed": 5,
+      "delivery_rate": 80.0,
+      "on_time_rate": 100.0,
+      "total_reward": 359.8519,
+      "total_movecost": -1.6248,
+      "net_reward": 358.2271,
+      "elapsed_sec": 0.5593,
+      "shipper_rewards": [
+        148.6682,
+        209.5589
+      ],
+      "status": "OK",
+      "wall_sec": 0.56
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "C2",
+      "total_orders": 25,
+      "orders_generated": 25,
+      "delivered": 21,
+      "on_time": 19,
+      "late": 2,
+      "missed": 4,
+      "delivery_rate": 84.0,
+      "on_time_rate": 90.47619047619048,
+      "total_reward": 436.7873,
+      "total_movecost": -2.5865,
+      "net_reward": 434.2008,
+      "elapsed_sec": 0.1345,
+      "shipper_rewards": [
+        196.9757,
+        237.2251
+      ],
+      "status": "OK",
+      "wall_sec": 0.14
+    },
+    {
       "method": "MAPD-CBS",
       "config_name": "C2",
       "total_orders": 25,
@@ -17,13 +83,13 @@
       "total_reward": 478.599,
       "total_movecost": -2.6236,
       "net_reward": 475.9754,
-      "elapsed_sec": 0.0738,
+      "elapsed_sec": 0.177,
       "shipper_rewards": [
         180.8341,
         295.1414
       ],
       "status": "OK",
-      "wall_sec": 0.07
+      "wall_sec": 0.18
     }
   ]
 }

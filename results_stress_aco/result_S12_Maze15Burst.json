@@ -1,0 +1,33 @@
+{
+  "config_name": "S12_Maze15Burst",
+  "orders_total_fixed": 150,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "ACOSolver",
+      "config_name": "S12_Maze15Burst",
+      "total_orders": 150,
+      "orders_generated": 150,
+      "delivered": 12,
+      "on_time": 12,
+      "late": 0,
+      "missed": 138,
+      "delivery_rate": 8.0,
+      "on_time_rate": 100.0,
+      "total_reward": 249.9925,
+      "total_movecost": -3.4945,
+      "net_reward": 246.498,
+      "elapsed_sec": 1.833,
+      "shipper_rewards": [
+        -0.11,
+        94.0556,
+        69.1771,
+        9.6444,
+        7.6807,
+        66.0501
+      ],
+      "status": "OK",
+      "wall_sec": 1.84
+    }
+  ]
+}

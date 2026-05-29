@@ -4,6 +4,81 @@
   "online_generation": true,
   "results": [
     {
+      "method": "GreedyBFS",
+      "config_name": "C5",
+      "total_orders": 80,
+      "orders_generated": 80,
+      "delivered": 61,
+      "on_time": 56,
+      "late": 5,
+      "missed": 19,
+      "delivery_rate": 76.25,
+      "on_time_rate": 91.80327868852459,
+      "total_reward": 1249.4763,
+      "total_movecost": -19.7985,
+      "net_reward": 1229.6779,
+      "elapsed_sec": 0.8396,
+      "shipper_rewards": [
+        169.5663,
+        172.1724,
+        321.3452,
+        234.9337,
+        331.6604
+      ],
+      "status": "OK",
+      "wall_sec": 0.84
+    },
+    {
+      "method": "VRPOrTools",
+      "config_name": "C5",
+      "total_orders": 80,
+      "orders_generated": 80,
+      "delivered": 74,
+      "on_time": 51,
+      "late": 23,
+      "missed": 6,
+      "delivery_rate": 92.5,
+      "on_time_rate": 68.91891891891892,
+      "total_reward": 1173.3814,
+      "total_movecost": -13.5964,
+      "net_reward": 1159.7851,
+      "elapsed_sec": 16.118,
+      "shipper_rewards": [
+        60.1904,
+        279.6632,
+        295.8511,
+        264.7133,
+        259.3671
+      ],
+      "status": "OK",
+      "wall_sec": 16.12
+    },
+    {
+      "method": "ACOSolver",
+      "config_name": "C5",
+      "total_orders": 80,
+      "orders_generated": 80,
+      "delivered": 56,
+      "on_time": 50,
+      "late": 6,
+      "missed": 24,
+      "delivery_rate": 70.0,
+      "on_time_rate": 89.28571428571429,
+      "total_reward": 1113.028,
+      "total_movecost": -26.4141,
+      "net_reward": 1086.614,
+      "elapsed_sec": 1.5946,
+      "shipper_rewards": [
+        240.5048,
+        254.7543,
+        310.2716,
+        142.7819,
+        138.3013
+      ],
+      "status": "OK",
+      "wall_sec": 1.6
+    },
+    {
       "method": "MAPD-CBS",
       "config_name": "C5",
       "total_orders": 80,
@@ -17,7 +92,7 @@
       "total_reward": 1456.5126,
       "total_movecost": -16.9626,
       "net_reward": 1439.55,
-      "elapsed_sec": 2.0161,
+      "elapsed_sec": 4.7927,
       "shipper_rewards": [
         232.5413,
         207.1424,
@@ -26,7 +101,7 @@
         271.633
       ],
       "status": "OK",
-      "wall_sec": 2.02
+      "wall_sec": 4.79
     }
   ]
 }

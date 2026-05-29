@@ -1,0 +1,143 @@
+[
+  {
+    "method": "ACOSolver",
+    "config_name": "C1",
+    "total_orders": 15,
+    "orders_generated": 15,
+    "delivered": 13,
+    "on_time": 13,
+    "late": 0,
+    "missed": 2,
+    "delivery_rate": 86.66666666666667,
+    "on_time_rate": 100.0,
+    "total_reward": 267.2826,
+    "total_movecost": -1.1732,
+    "net_reward": 266.1094,
+    "elapsed_sec": 0.0817,
+    "shipper_rewards": [
+      206.3134,
+      59.796
+    ],
+    "status": "OK",
+    "wall_sec": 0.08
+  },
+  {
+    "method": "ACOSolver",
+    "config_name": "C2",
+    "total_orders": 25,
+    "orders_generated": 25,
+    "delivered": 21,
+    "on_time": 19,
+    "late": 2,
+    "missed": 4,
+    "delivery_rate": 84.0,
+    "on_time_rate": 90.47619047619048,
+    "total_reward": 436.7873,
+    "total_movecost": -2.5865,
+    "net_reward": 434.2008,
+    "elapsed_sec": 0.1354,
+    "shipper_rewards": [
+      196.9757,
+      237.2251
+    ],
+    "status": "OK",
+    "wall_sec": 0.14
+  },
+  {
+    "method": "ACOSolver",
+    "config_name": "C3",
+    "total_orders": 40,
+    "orders_generated": 40,
+    "delivered": 27,
+    "on_time": 25,
+    "late": 2,
+    "missed": 13,
+    "delivery_rate": 67.5,
+    "on_time_rate": 92.5925925925926,
+    "total_reward": 645.5065,
+    "total_movecost": -5.0963,
+    "net_reward": 640.4102,
+    "elapsed_sec": 0.3205,
+    "shipper_rewards": [
+      203.962,
+      181.1906,
+      255.2577
+    ],
+    "status": "OK",
+    "wall_sec": 0.32
+  },
+  {
+    "method": "ACOSolver",
+    "config_name": "C4",
+    "total_orders": 60,
+    "orders_generated": 60,
+    "delivered": 44,
+    "on_time": 43,
+    "late": 1,
+    "missed": 16,
+    "delivery_rate": 73.33333333333333,
+    "on_time_rate": 97.72727272727273,
+    "total_reward": 893.327,
+    "total_movecost": -14.5362,
+    "net_reward": 878.7908,
+    "elapsed_sec": 1.0108,
+    "shipper_rewards": [
+      387.7995,
+      236.8538,
+      81.9706,
+      172.1668
+    ],
+    "status": "OK",
+    "wall_sec": 1.01
+  },
+  {
+    "method": "ACOSolver",
+    "config_name": "C5",
+    "total_orders": 80,
+    "orders_generated": 80,
+    "delivered": 56,
+    "on_time": 50,
+    "late": 6,
+    "missed": 24,
+    "delivery_rate": 70.0,
+    "on_time_rate": 89.28571428571429,
+    "total_reward": 1113.028,
+    "total_movecost": -26.4141,
+    "net_reward": 1086.614,
+    "elapsed_sec": 1.6736,
+    "shipper_rewards": [
+      240.5048,
+      254.7543,
+      310.2716,
+      142.7819,
+      138.3013
+    ],
+    "status": "OK",
+    "wall_sec": 1.68
+  },
+  {
+    "method": "ACOSolver",
+    "config_name": "C6",
+    "total_orders": 100,
+    "orders_generated": 100,
+    "delivered": 60,
+    "on_time": 53,
+    "late": 7,
+    "missed": 40,
+    "delivery_rate": 60.0,
+    "on_time_rate": 88.33333333333333,
+    "total_reward": 1241.6006,
+    "total_movecost": -21.4549,
+    "net_reward": 1220.1457,
+    "elapsed_sec": 2.2291,
+    "shipper_rewards": [
+      190.4892,
+      230.3317,
+      334.5786,
+      289.7522,
+      174.994
+    ],
+    "status": "OK",
+    "wall_sec": 2.23
+  }
+]

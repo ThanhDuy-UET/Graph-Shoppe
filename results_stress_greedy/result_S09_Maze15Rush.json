@@ -1,0 +1,31 @@
+{
+  "config_name": "S09_Maze15Rush",
+  "orders_total_fixed": 95,
+  "online_generation": true,
+  "results": [
+    {
+      "method": "GreedyBFS",
+      "config_name": "S09_Maze15Rush",
+      "total_orders": 95,
+      "orders_generated": 95,
+      "delivered": 6,
+      "on_time": 5,
+      "late": 1,
+      "missed": 89,
+      "delivery_rate": 6.315789473684211,
+      "on_time_rate": 83.33333333333333,
+      "total_reward": 114.2652,
+      "total_movecost": -2.5344,
+      "net_reward": 111.7308,
+      "elapsed_sec": 0.3865,
+      "shipper_rewards": [
+        25.4342,
+        -0.0833,
+        21.2366,
+        65.1433
+      ],
+      "status": "OK",
+      "wall_sec": 0.39
+    }
+  ]
+}
